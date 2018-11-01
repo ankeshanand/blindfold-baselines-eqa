@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import torch.optim as optim
 import numpy as np
 import random
 import csv
@@ -19,6 +20,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--seed", type=int, default=42)
 args = parser.parse_args()
 
+# Set all kinds of seeds
 random.seed(args.seed)
 np.random.seed(args.seed)
 torch.manual_seed(args.seed)
@@ -69,10 +71,10 @@ class FastText(nn.Module):
 INPUT_DIM = len(QUESTION.vocab)
 model = FastText(INPUT_DIM, EMBEDDING_DIM, OUTPUT_DIM)
 
+# Initialize the Embedding layer with Glove vectors
 pretrained_embeddings = QUESTION.vocab.vectors
 model.embedding.weight.data.copy_(pretrained_embeddings)
 
-import torch.optim as optim
 optimizer = optim.Adam(model.parameters(), lr=5e-3)
 scheduler = ReduceLROnPlateau(optimizer, 'min', patience=3, factor=0.5, verbose=False)
 
