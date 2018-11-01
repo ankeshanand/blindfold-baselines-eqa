@@ -166,8 +166,7 @@ for epoch in range(N_EPOCHS):
         min_valid_loss = valid_loss
         min_valid_loss_epoch = epoch
         inspect = True
-    else:
-        inspect = False
+        open('results/preds.csv', 'w').close()
 
     test_loss, test_acc, test_mean_rank = evaluate(model, test_iterator, criterion, inspect=inspect)
     scheduler.step(valid_loss)
@@ -179,6 +178,7 @@ for epoch in range(N_EPOCHS):
         f'| Epoch: {epoch+1:02} | Train Loss: {train_loss:.3f} | Train Acc: {train_acc*100:.2f}% | Train MR: {train_mean_rank:.2f}'
         f' | Val. Loss: {valid_loss:.3f} | Val. Acc: {valid_acc*100:.2f}% | Val. MR: {valid_mean_rank:.2f}')
     print(f'| Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}% | Test MR: {test_mean_rank:.2f}')
+    inspect = False
 
 print(f'Got minimum valid loss: {min_valid_loss:.3f}, at Epoch: {min_valid_loss_epoch+1:02}')
-print(f'Test accuracy at minimum valid loss checkpoint: {corr_test_acc:.2f}')
+print(f'Test accuracy at minimum valid loss checkpoint: {corr_test_acc:.6f}')
