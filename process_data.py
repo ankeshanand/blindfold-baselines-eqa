@@ -36,4 +36,8 @@ with jsonlines.open('data/val.json', mode='w') as writer:
 with jsonlines.open('data/test.json', mode='w') as writer:
     writer.write_all(test_data)
 
-print(len(answer2idx))
+print(answer2idx)
+idx2answer = {}
+for k, v in answer2idx.items():
+    idx2answer[v] = k
+print(idx2answer)
