@@ -5,11 +5,9 @@ import torch.optim as optim
 import numpy as np
 import random
 import csv
-import click
 
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 from torchtext import data
-from torchtext import datasets
 from torchtext.data import Field
 
 from config import *
