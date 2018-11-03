@@ -1,7 +1,7 @@
 # eqa-baselines
-Simple baselines for EmbodiedQA
+Blindfold baselines for EmbodiedQA
 
-To use BoW baseline, run
+To use the BoW baseline, run
 ```
 python main.py
 ```
