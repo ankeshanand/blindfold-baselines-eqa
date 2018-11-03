@@ -1,5 +1,5 @@
 # eqa-baselines
-Blindfold baselines for EmbodiedQA
+Blindfold, Question-only baselines for EmbodiedQA
 
 To use the BoW baseline, run
 ```
