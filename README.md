@@ -11,8 +11,8 @@ We explore blindfold (question-only) baselines for [Embodied Question Answering]
 * torchtext
 * jsonlines
 
-# Usage
-To use the BoW baseline, simply run
-```
-python main.py
-```
+# Usage 
+* To use the BoW baseline, run `python main.py`
+
+* To use the NN baseline, run `python count_baseline.py`
+
