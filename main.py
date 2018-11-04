@@ -83,7 +83,7 @@ criterion = criterion.to(device)
 
 def accuracy(preds, y):
     preds = preds.argmax(dim=1)
-    correct = (preds == y).float() #convert into float for division
+    correct = (preds == y).float() # convert into float for division
     acc = correct.sum()/len(correct)
     return acc
 
@@ -161,6 +161,7 @@ inspect = False
 for epoch in range(N_EPOCHS):
     train_loss, train_acc, train_mean_rank = train(model, train_iterator, optimizer, criterion)
     valid_loss, valid_acc, valid_mean_rank = evaluate(model, valid_iterator, criterion)
+    scheduler.step(valid_loss)
 
     if valid_loss < min_valid_loss:
         min_valid_loss = valid_loss
@@ -169,15 +170,12 @@ for epoch in range(N_EPOCHS):
         open('results/preds.csv', 'w').close()
 
     test_loss, test_acc, test_mean_rank = evaluate(model, test_iterator, criterion, inspect=inspect)
-    scheduler.step(valid_loss)
-
     if inspect:
         corr_test_acc = test_acc
 
     print(
         f'| Epoch: {epoch+1:02} | Train Loss: {train_loss:.3f} | Train Acc: {train_acc*100:.2f}% | Train MR: {train_mean_rank:.2f}'
         f' | Val. Loss: {valid_loss:.3f} | Val. Acc: {valid_acc*100:.2f}% | Val. MR: {valid_mean_rank:.2f}')
-    print(f'| Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}% | Test MR: {test_mean_rank:.2f}')
     inspect = False
 
 print(f'Got minimum valid loss: {min_valid_loss:.3f}, at Epoch: {min_valid_loss_epoch+1:02}')
